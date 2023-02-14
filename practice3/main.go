@@ -1,9 +1,10 @@
 package main
 
 import (
-	"awesomeProject/practice3/model"
+	_ "awesomeProject/practice3/model"
+	"fmt"
 )
 
 func main() {
-	s := model.New("")
+	fmt.Println("a")
 }
