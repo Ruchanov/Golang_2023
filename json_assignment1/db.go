@@ -8,55 +8,64 @@ import (
 	"log"
 )
 
-func getDataAboutAccs() []Account {
-	data, err := ioutil.ReadFile("dataOfAccs.json")
+type Data struct {
+	Users []Account `json:"users"`
+	Books []Book    `json:"books"`
+}
+
+func getData() Data {
+	data, err := ioutil.ReadFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\json_assignment1\\dataOfAccs.json")
 	if err != nil {
 		// If the file doesn't exist, return an empty slice of accounts
-		return []Account{}
+		return Data{}
 	}
 
 	// Unmarshal the JSON data into a slice of accounts
-	var accounts []Account
+	var accounts Data
 	err = json.Unmarshal(data, &accounts)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	return accounts
 }
 
-func getDataAboutBook() []Book {
-	data, err := ioutil.ReadFile("dataOfBooks.json")
+//	func saveAccs(myData) {
+//		data, err := json.MarshalIndent(myData, "", "  ")
+//		if err != nil {
+//			log.Fatal(err)
+//		}
+//		// Write the JSON data to a file
+//		err = ioutil.WriteFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\json_assignment1\\dataOfAccs.json", data, 0644)
+//		if err != nil {
+//			log.Fatal(err)
+//		}
+//	}
+func saveDataToFile(data *Data) error {
+	//fmt.Println(data)
+	// Marshal the data into JSON format
+	jsonData, err := json.MarshalIndent(data, "", "    ")
+	fmt.Println(jsonData)
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
-	var books []Book
-	err = json.Unmarshal(data, &books)
+	jsonDataString := string(jsonData)
+	// Write the JSON data to the file
+	err = ioutil.WriteFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\json_assignment1\\dataOfAccs.json", []byte(jsonDataString), 0644)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("xaas")
+		return err
 	}
-	return books
+	return nil
 }
-func saveAccs(myData []Account) {
-	data, err := json.MarshalIndent(myData, "", "  ")
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Write the JSON data to a file
-	err = ioutil.WriteFile("dataOfAccs.json", data, 0644)
-	if err != nil {
-		log.Fatal(err)
-	}
 
-}
-func saveBooks(myData []Book) {
-	data, err := json.MarshalIndent(myData, "", "  ")
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Write the JSON data to a file
-	err = ioutil.WriteFile("dataOfBooks.json", data, 0644)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
+//func saveBooks(myData []Book) {
+//	data, err := json.MarshalIndent(myData, "", "  ")
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	// Write the JSON data to a file
+//	err = ioutil.WriteFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\json_assignment1\\dataOfBooks.json", data, 0644)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//}

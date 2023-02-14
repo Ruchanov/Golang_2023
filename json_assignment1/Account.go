@@ -5,17 +5,19 @@ type Account struct {
 	password string `json:"password"`
 }
 
-func Registration(login, password string) {
-	Accounts := getDataAboutAccs()
-	Accounts = append(Accounts, Account{login, password})
-	saveAccs(Accounts)
+func Registration(log, pass string) {
+	Accounts := getData()
+	temp := Account{log, pass}
+	Accounts.Users = append(Accounts.Users, temp)
+
+	saveDataToFile(Accounts)
 }
 
 func Authorization(log, pass string) *Account {
-	Accounts := getDataAboutAccs()
-	for i := 0; i < len(Accounts); i++ {
-		if Accounts[i].login == log && Accounts[i].password == pass {
-			return &Accounts[i]
+	Accounts := getData()
+	for i := 0; i < len(Accounts.Users); i++ {
+		if Accounts.Users[i].login == log && Accounts.Users[i].password == pass {
+			return &Accounts.Users[i]
 		}
 	}
 	//return
