@@ -2,7 +2,6 @@ package accs
 
 import (
 	"encoding/json"
-	"fmt"
 	_ "github.com/lib/pq"
 	"io/ioutil"
 	"log"
@@ -14,10 +13,12 @@ type Data struct {
 }
 
 func getData() Data {
-	data, err := ioutil.ReadFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\json_assignment1\\dataOfAccs.json")
+	data, err := ioutil.ReadFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\assignment1\\data.json")
 	if err != nil {
 		// If the file doesn't exist, return an empty slice of accounts
-		return Data{}
+		log.Println(err)
+		// Return an empty slice of accounts
+		return Data{Users: []Account{}}
 	}
 
 	// Unmarshal the JSON data into a slice of accounts
@@ -35,7 +36,7 @@ func getData() Data {
 //			log.Fatal(err)
 //		}
 //		// Write the JSON data to a file
-//		err = ioutil.WriteFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\json_assignment1\\dataOfAccs.json", data, 0644)
+//		err = ioutil.WriteFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\assignment1\\data.json", data, 0644)
 //		if err != nil {
 //			log.Fatal(err)
 //		}
@@ -43,16 +44,16 @@ func getData() Data {
 func saveDataToFile(data *Data) error {
 	//fmt.Println(data)
 	// Marshal the data into JSON format
-	jsonData, err := json.MarshalIndent(data, "", "    ")
-	fmt.Println(jsonData)
+	//jsonData, err := json.MarshalIndent(data, "", "    ")
+	jsonData, err := json.Marshal(data)
+	//fmt.Println(jsonData)
 	if err != nil {
 		return err
 	}
 	jsonDataString := string(jsonData)
 	// Write the JSON data to the file
-	err = ioutil.WriteFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\json_assignment1\\dataOfAccs.json", []byte(jsonDataString), 0644)
+	err = ioutil.WriteFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\assignment1\\data.json", []byte(jsonDataString), 0644)
 	if err != nil {
-		fmt.Println("xaas")
 		return err
 	}
 	return nil
@@ -64,7 +65,7 @@ func saveDataToFile(data *Data) error {
 //		log.Fatal(err)
 //	}
 //	// Write the JSON data to a file
-//	err = ioutil.WriteFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\json_assignment1\\dataOfBooks.json", data, 0644)
+//	err = ioutil.WriteFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\assignment1\\dataOfBooks.json", data, 0644)
 //	if err != nil {
 //		log.Fatal(err)
 //	}

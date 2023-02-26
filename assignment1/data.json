@@ -1,0 +1,1 @@
+{"users":[{"login":"magzhan","password":"123"}],"books":[{"Name": "Algorithms in Java", "Author":"Kevin Wayne", "Rating": 3.5, "Price": 5000, "NumOfRates": 5, "Quantity": 10},{"Name": "Machine learning", "Author":"Ruchanov Yaslan", "Rating": 4.5, "Price": 10000, "NumOfRates": 10, "Quantity": 11}]}
