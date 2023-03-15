@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel = "stylesheet" href = "productsPage.css" type="text/css">
+  <title>Title</title>
+</head>
+<body>
+<div>
+  <form action="/book" method="GET">
+    <input type="text" name="name" placeholder="Search by name">
+    <button type="submit">Search</button>
+  </form>
+</div>
+<div>
+  <form action="/byPrice" method="GET">
+    <label>Price range:</label>
+    <input type="number" name="minPrice" placeholder="Min price">
+    <input type="number" name="maxPrice" placeholder="Max price">
+    <button type="submit">Search</button>
+  </form>
+</div>
+<div>
+  <form action="/byRating" method="GET">
+    <label>Rating range:</label>
+    <input type="number" name="minRating" placeholder="Min rating">
+    <input type="number" name="maxRating" placeholder="Max rating">
+    <button type="submit">Search</button>
+  </form>
+</div>
+{{range .}}
+<div class="book">
+  <h2 class="title">{{.Name}}</h2>
+  <h3 class="author">By {{.Author}}</h3>
+  <div class="rating">
+    <span class="stars">{{.Rating}}</span>
+    <span class="num-ratings">({{.NumOfRates}} ratings)</span>
+  </div>
+  <div class="price">{{.Price}} TG</div>
+  <div class="quantity">{{.Quantity}} in stock</div>
+  <form method="GET" action="/rate">
+    <input type="hidden" name="bookName" value="{{.Name}}">
+    <div class="rating">
+      <label><input type="radio" name="rating" value="1"> 1</label>
+      <label><input type="radio" name="rating" value="2"> 2</label>
+      <label><input type="radio" name="rating" value="3"> 3</label>
+      <label><input type="radio" name="rating" value="4"> 4</label>
+      <label><input type="radio" name="rating" value="5"> 5</label>
+    </div>
+    <div class="submit">
+      <input type="submit" value="Rate">
+    </div>
+  </form>
+</div>
+{{end}}
+</body>

@@ -12,7 +12,7 @@ type Book struct {
 }
 
 func GiveRatingByName(s string, rat int) {
-	data := getData()
+	data := GetData()
 	//books := data.Books
 	for i := 0; i < len(data.Books); i++ {
 		if data.Books[i].Name == s {
@@ -30,8 +30,21 @@ func (b *Book) showInfoAboutBooks() {
 	fmt.Printf("Name:%s Author:%s Rating:%f Price:%d NumOfRates:%d Quantity:%d\n", b.Name, b.Author, b.Rating, b.Price, b.NumOfRates, b.Quantity)
 }
 
-func SearchByName(s string) {
-	books := getData().Books
+//	func SearchByName(s string) {
+//		books := GetData().Books
+//		l := []Book{}
+//		for i := 0; i < len(books); i++ {
+//			if books[i].Name == s {
+//				//return &books[i]
+//				l = append(l, books[i])
+//			}
+//		}
+//		for i := 0; i < len(l); i++ {
+//			l[i].showInfoAboutBooks()
+//		}
+//	}
+func SearchByName(s string) []Book {
+	books := GetData().Books
 	l := []Book{}
 	for i := 0; i < len(books); i++ {
 		if books[i].Name == s {
@@ -39,9 +52,7 @@ func SearchByName(s string) {
 			l = append(l, books[i])
 		}
 	}
-	for i := 0; i < len(l); i++ {
-		l[i].showInfoAboutBooks()
-	}
+	return l
 }
 
 //	func GetByName(s string) *Book {
@@ -56,24 +67,28 @@ func SearchByName(s string) {
 //		return &books[j]
 //	}
 func ShowAll() {
-	books := getData().Books
+	books := GetData().Books
 	for i := 0; i < len(books); i++ {
 		books[i].showInfoAboutBooks()
 	}
 }
-func FilterByPrice(a, b int) {
-	books := getData().Books
+func FilterByPrice(a, b int) []Book {
+	books := GetData().Books
+	l := []Book{}
 	for i := 0; i < len(books); i++ {
 		if books[i].Price >= a && books[i].Price <= b {
-			books[i].showInfoAboutBooks()
+			l = append(l, books[i])
 		}
 	}
+	return l
 }
-func FilterByRating(a, b float64) {
-	books := getData().Books
+func FilterByRating(a, b float64) []Book {
+	books := GetData().Books
+	l := []Book{}
 	for i := 0; i < len(books); i++ {
 		if books[i].Rating >= a && books[i].Rating <= b {
-			books[i].showInfoAboutBooks()
+			l = append(l, books[i])
 		}
 	}
+	return l
 }

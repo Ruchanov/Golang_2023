@@ -12,7 +12,7 @@ type Data struct {
 	Books []Book    `json:"books"`
 }
 
-func getData() Data {
+func GetData() Data {
 	data, err := ioutil.ReadFile("C:\\Users\\ЯСЛАН\\GolandProjects\\awesomeProject\\assignment1\\data.json")
 	if err != nil {
 		// If the file doesn't exist, return an empty slice of accounts
