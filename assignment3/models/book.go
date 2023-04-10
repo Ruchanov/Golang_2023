@@ -7,5 +7,5 @@ type Book struct {
 	Id          uint   `json:"id" gorm: "primary key"`
 	Title       string `json: "title"`
 	Description string `json: "description"`
-	cost        int    `json: "cost"`
+	Cost        int    `json: "cost"`
 }

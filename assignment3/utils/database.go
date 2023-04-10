@@ -24,8 +24,6 @@ func InitDB() (*gorm.DB, error) {
 	return db, nil
 }
 func migrateDB(db *gorm.DB) error {
-
-	// Create the books table and apply any constraints
 	err := db.AutoMigrate(&models.Book{})
 	if err != nil {
 		return fmt.Errorf("failed to migrate books table: %v", err)
