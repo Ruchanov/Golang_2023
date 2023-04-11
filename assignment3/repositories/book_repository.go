@@ -13,12 +13,10 @@ type BookRepository struct {
 func NewBookRepository(db *gorm.DB) *BookRepository {
 	return &BookRepository{db}
 }
-func (r *BookRepository) GetBooks() (*[]models.Book, error) {
-	rows, err := r.db.Find(&models.Book{}).Rows()
-	if err != nil {
-		return nil, err
-	}
-	return Iterator(rows)
+func (r *BookRepository) GetBooks() []models.Book {
+	var books []models.Book
+	r.db.Find(&books)
+	return books
 }
 func (r *BookRepository) GetBookByID(id int) (*models.Book, error) {
 	var book models.Book

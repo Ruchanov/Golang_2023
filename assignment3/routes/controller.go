@@ -23,11 +23,11 @@ func NewController(db *gorm.DB) *Controller {
 
 func (c *Controller) HandleBooks(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		res, err := c.repository.GetBooks()
-		if err != nil {
-			errorResponse(w, http.StatusInternalServerError, err)
-			return
-		}
+		res := c.repository.GetBooks()
+		//if err != nil {
+		//	errorResponse(w, http.StatusInternalServerError, err)
+		//	return
+		//}
 		response(w, http.StatusOK, res)
 	} else if r.Method == "POST" {
 		book := models.Book{}
